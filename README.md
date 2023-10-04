@@ -17,3 +17,50 @@ A Hall sensor operates based on the Hall effect, where a voltage is generated ac
 ## Schematic
 
 ![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/408eeda4-4e64-4084-9224-1efe63478635)
+
+## C Program
+
+```
+#include <stdio.h>
+int BUZZER,LED;
+
+void setup() {
+    // Initialize hardware and setup pin modes here
+}
+
+void alarm() {
+    BUZZER=1;
+    LED=1;
+    printf("Door Open! Magnet not Detected");;
+    // Activate the alarm (sound buzzer, turn on LED)
+}
+
+void turnOffAlarm() {
+    BUZZER=0;
+    LED=0;
+    printf("Door closed Magnet Detected");
+    
+    // Turn off the alarm (stop buzzer, turn off LED)
+}
+
+int main() {
+
+    setup();
+
+    int hallSensorState = 0;
+
+    while(1) {
+        // Read the state of the Hall sensor
+        // hallSensorState = DigitalRead(HALL_SENSOR_PIN);
+
+        // Check if magnetic field is not detected meaning door open
+        if (hallSensorState == 0) {
+            alarm(); // Activate the alarm
+        }
+        else {
+            turnOffAlarm();
+        }
+    }
+
+    return 0;
+```
