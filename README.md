@@ -22,34 +22,62 @@ A Hall sensor operates based on the Hall effect, where a voltage is generated ac
 
 ```
 #include <stdio.h>
-int BUZZER,LED;
 
-void setup() {
-    // Initialize hardware and setup pin modes here
-}
+int BUZZER, LED;
 
 void alarm() {
-    BUZZER=1;
-    LED=1;
-    printf("Door Open! Magnet not Detected");;
+    BUZZER = 1;
+    LED = 1;
+    printf("Door Open! Magnet not Detected\n");
+
     // Activate the alarm (sound buzzer, turn on LED)
+    int buzzer_temp;
+    buzzer_temp = BUZZER * 2;
+    asm(
+        "or x30, x30, %0\n\t"
+        : "=r"(buzzer_temp)
+    );
+
+    int led_reg;
+    led_reg = LED * 2;
+    asm(
+        "or x30, x30, %0\n\t"
+        : "=r"(led_reg)
+    );
 }
 
 void turnOffAlarm() {
-    BUZZER=0;
-    LED=0;
-    printf("Door closed Magnet Detected");
-    
+    BUZZER = 0;
+    LED = 0;
+    printf("Door closed Magnet Detected\n");
+
     // Turn off the alarm (stop buzzer, turn off LED)
+    int buzzer_temp;
+    buzzer_temp = BUZZER * 2;
+    asm(
+        "or x30, x30, %0\n\t"
+        : "=r"(buzzer_temp)
+    );
+
+    int led_reg;
+    led_reg = LED * 2;
+    asm(
+        "or x30, x30, %0\n\t"
+        : "=r"(led_reg)
+    );
 }
 
 int main() {
 
-    setup();
 
     int hallSensorState = 0;
 
     while(1) {
+    
+    	asm(
+            "andi %0, x30, 1"
+            : "=r"(hallSensorState)
+        );
         // Read the state of the Hall sensor
         // hallSensorState = DigitalRead(HALL_SENSOR_PIN);
 
