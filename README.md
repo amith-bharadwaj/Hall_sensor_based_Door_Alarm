@@ -209,3 +209,8 @@ lw
 sll
 
 ```
+## References
+
+1. https://github.com/SakethGajawada/RISCV_GNU
+2. https://github.com/bhargav-vlsi/RISCV-Display-controller
+3. https://circuitdigest.com/microcontroller-projects/interfacing-hall-effect-sensor-module-with-arduino
