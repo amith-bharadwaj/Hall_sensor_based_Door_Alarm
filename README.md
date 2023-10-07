@@ -96,118 +96,98 @@ int main() {
 ## Assembly Code
 
 ```
-new.o:     file format elf32-littleriscv
+
+amith_c.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text:
 
-00000000 <alarm>:
-   0:	fe010113          	add	sp,sp,-32
-   4:	00112e23          	sw	ra,28(sp)
-   8:	00812c23          	sw	s0,24(sp)
-   c:	02010413          	add	s0,sp,32
-  10:	000007b7          	lui	a5,0x0
-  14:	00100713          	li	a4,1
-  18:	00e7a023          	sw	a4,0(a5) # 0 <alarm>
-  1c:	000007b7          	lui	a5,0x0
-  20:	00100713          	li	a4,1
-  24:	00e7a023          	sw	a4,0(a5) # 0 <alarm>
-  28:	000007b7          	lui	a5,0x0
-  2c:	00078513          	mv	a0,a5
-  30:	00000097          	auipc	ra,0x0
-  34:	000080e7          	jalr	ra # 30 <alarm+0x30>
-  38:	000007b7          	lui	a5,0x0
-  3c:	0007a783          	lw	a5,0(a5) # 0 <alarm>
-  40:	00179793          	sll	a5,a5,0x1
-  44:	fef42623          	sw	a5,-20(s0)
-  48:	00ff6f33          	or	t5,t5,a5
-  4c:	fef42623          	sw	a5,-20(s0)
-  50:	000007b7          	lui	a5,0x0
-  54:	0007a783          	lw	a5,0(a5) # 0 <alarm>
-  58:	00179793          	sll	a5,a5,0x1
-  5c:	fef42423          	sw	a5,-24(s0)
-  60:	00ff6f33          	or	t5,t5,a5
-  64:	fef42423          	sw	a5,-24(s0)
-  68:	00000013          	nop
-  6c:	01c12083          	lw	ra,28(sp)
-  70:	01812403          	lw	s0,24(sp)
-  74:	02010113          	add	sp,sp,32
-  78:	00008067          	ret
+00010094 <alarm>:
+   10094:	fe010113          	add	sp,sp,-32
+   10098:	00812e23          	sw	s0,28(sp)
+   1009c:	02010413          	add	s0,sp,32
+   100a0:	000117b7          	lui	a5,0x11
+   100a4:	00100713          	li	a4,1
+   100a8:	18e7a423          	sw	a4,392(a5) # 11188 <__DATA_BEGIN__>
+   100ac:	000117b7          	lui	a5,0x11
+   100b0:	00100713          	li	a4,1
+   100b4:	18e7a623          	sw	a4,396(a5) # 1118c <LED>
+   100b8:	000117b7          	lui	a5,0x11
+   100bc:	1887a783          	lw	a5,392(a5) # 11188 <__DATA_BEGIN__>
+   100c0:	00179793          	sll	a5,a5,0x1
+   100c4:	fef42623          	sw	a5,-20(s0)
+   100c8:	fec42783          	lw	a5,-20(s0)
+   100cc:	00ff6f33          	or	t5,t5,a5
+   100d0:	000117b7          	lui	a5,0x11
+   100d4:	18c7a783          	lw	a5,396(a5) # 1118c <LED>
+   100d8:	00179793          	sll	a5,a5,0x1
+   100dc:	fef42423          	sw	a5,-24(s0)
+   100e0:	fe842783          	lw	a5,-24(s0)
+   100e4:	00ff6f33          	or	t5,t5,a5
+   100e8:	00000013          	nop
+   100ec:	01c12403          	lw	s0,28(sp)
+   100f0:	02010113          	add	sp,sp,32
+   100f4:	00008067          	ret
 
-0000007c <turnOffAlarm>:
-  7c:	fe010113          	add	sp,sp,-32
-  80:	00112e23          	sw	ra,28(sp)
-  84:	00812c23          	sw	s0,24(sp)
-  88:	02010413          	add	s0,sp,32
-  8c:	000007b7          	lui	a5,0x0
-  90:	0007a023          	sw	zero,0(a5) # 0 <alarm>
-  94:	000007b7          	lui	a5,0x0
-  98:	0007a023          	sw	zero,0(a5) # 0 <alarm>
-  9c:	000007b7          	lui	a5,0x0
-  a0:	00078513          	mv	a0,a5
-  a4:	00000097          	auipc	ra,0x0
-  a8:	000080e7          	jalr	ra # a4 <turnOffAlarm+0x28>
-  ac:	000007b7          	lui	a5,0x0
-  b0:	0007a783          	lw	a5,0(a5) # 0 <alarm>
-  b4:	00179793          	sll	a5,a5,0x1
-  b8:	fef42623          	sw	a5,-20(s0)
-  bc:	00ff6f33          	or	t5,t5,a5
-  c0:	fef42623          	sw	a5,-20(s0)
-  c4:	000007b7          	lui	a5,0x0
-  c8:	0007a783          	lw	a5,0(a5) # 0 <alarm>
-  cc:	00179793          	sll	a5,a5,0x1
-  d0:	fef42423          	sw	a5,-24(s0)
-  d4:	00ff6f33          	or	t5,t5,a5
-  d8:	fef42423          	sw	a5,-24(s0)
-  dc:	00000013          	nop
-  e0:	01c12083          	lw	ra,28(sp)
-  e4:	01812403          	lw	s0,24(sp)
-  e8:	02010113          	add	sp,sp,32
-  ec:	00008067          	ret
+000100f8 <turnOffAlarm>:
+   100f8:	fe010113          	add	sp,sp,-32
+   100fc:	00812e23          	sw	s0,28(sp)
+   10100:	02010413          	add	s0,sp,32
+   10104:	000117b7          	lui	a5,0x11
+   10108:	1807a423          	sw	zero,392(a5) # 11188 <__DATA_BEGIN__>
+   1010c:	000117b7          	lui	a5,0x11
+   10110:	1807a623          	sw	zero,396(a5) # 1118c <LED>
+   10114:	000117b7          	lui	a5,0x11
+   10118:	1887a783          	lw	a5,392(a5) # 11188 <__DATA_BEGIN__>
+   1011c:	00179793          	sll	a5,a5,0x1
+   10120:	fef42623          	sw	a5,-20(s0)
+   10124:	fec42783          	lw	a5,-20(s0)
+   10128:	00ff6f33          	or	t5,t5,a5
+   1012c:	000117b7          	lui	a5,0x11
+   10130:	18c7a783          	lw	a5,396(a5) # 1118c <LED>
+   10134:	00179793          	sll	a5,a5,0x1
+   10138:	fef42423          	sw	a5,-24(s0)
+   1013c:	fe842783          	lw	a5,-24(s0)
+   10140:	00ff6f33          	or	t5,t5,a5
+   10144:	00000013          	nop
+   10148:	01c12403          	lw	s0,28(sp)
+   1014c:	02010113          	add	sp,sp,32
+   10150:	00008067          	ret
 
-000000f0 <main>:
-  f0:	fe010113          	add	sp,sp,-32
-  f4:	00112e23          	sw	ra,28(sp)
-  f8:	00812c23          	sw	s0,24(sp)
-  fc:	02010413          	add	s0,sp,32
- 100:	fe042623          	sw	zero,-20(s0)
-
-00000104 <.L6>:
- 104:	001f7793          	and	a5,t5,1
- 108:	fef42623          	sw	a5,-20(s0)
- 10c:	fec42783          	lw	a5,-20(s0)
- 110:	00079863          	bnez	a5,120 <.L4>
- 114:	00000097          	auipc	ra,0x0
- 118:	000080e7          	jalr	ra # 114 <.L6+0x10>
- 11c:	fe9ff06f          	j	104 <.L6>
-
-00000120 <.L4>:
- 120:	00000097          	auipc	ra,0x0
- 124:	000080e7          	jalr	ra # 120 <.L4>
- 128:	fddff06f          	j	104 <.L6>
+00010154 <main>:
+   10154:	fe010113          	add	sp,sp,-32
+   10158:	00112e23          	sw	ra,28(sp)
+   1015c:	00812c23          	sw	s0,24(sp)
+   10160:	02010413          	add	s0,sp,32
+   10164:	fe042623          	sw	zero,-20(s0)
+   10168:	001f7793          	and	a5,t5,1
+   1016c:	fef42623          	sw	a5,-20(s0)
+   10170:	fec42783          	lw	a5,-20(s0)
+   10174:	00079663          	bnez	a5,10180 <main+0x2c>
+   10178:	f1dff0ef          	jal	10094 <alarm>
+   1017c:	fedff06f          	j	10168 <main+0x14>
+   10180:	f79ff0ef          	jal	100f8 <turnOffAlarm>
+   10184:	fe5ff06f          	j	10168 <main+0x14>
 
 ```
 ## Number of Unique Instructions
 
 ```
-Number of different instructions: 15
+Number of different instructions: 13
 List of unique instructions:
-mv
-auipc
-jalr
+sll
+lw
+jal
 j
 ret
-nop
-sw
-bnez
 lui
+sw
 or
 and
 add
 li
-lw
-sll
-
+bnez
+nop
 ```
 ## References
 
