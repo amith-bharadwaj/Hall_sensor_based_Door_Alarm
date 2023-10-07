@@ -21,63 +21,69 @@ A Hall sensor operates based on the Hall effect, where a voltage is generated ac
 ## C Program
 
 ```
-#include <stdio.h>
-
+#include<stdio.h>
 int BUZZER, LED;
-
 void alarm() {
     BUZZER = 1;
     LED = 1;
-    printf("Door Open! Magnet not Detected\n");
+    //printf("Door Open! Magnet not Detected\n");
 
     // Activate the alarm (sound buzzer, turn on LED)
-    int buzzer_temp;
-    buzzer_temp = BUZZER * 2;
-    asm(
+    int buzzer_reg;
+    buzzer_reg = BUZZER * 2;
+    asm volatile(
         "or x30, x30, %0\n\t"
-        : "=r"(buzzer_temp)
+        : 
+        : "r"(buzzer_reg)
+        : "x30"
     );
 
     int led_reg;
     led_reg = LED * 2;
-    asm(
+    asm volatile(
         "or x30, x30, %0\n\t"
-        : "=r"(led_reg)
+        : 
+        : "r"(led_reg)
+        : "x30"
     );
 }
 
 void turnOffAlarm() {
     BUZZER = 0;
     LED = 0;
-    printf("Door closed Magnet Detected\n");
+    //printf("Door closed Magnet Detected\n");
 
     // Turn off the alarm (stop buzzer, turn off LED)
-    int buzzer_temp;
-    buzzer_temp = BUZZER * 2;
-    asm(
+    int buzzer_reg;
+    buzzer_reg = BUZZER * 2;
+    asm volatile(
         "or x30, x30, %0\n\t"
-        : "=r"(buzzer_temp)
+        : 
+        : "r"(buzzer_reg)
+        : "x30"
     );
 
     int led_reg;
     led_reg = LED * 2;
-    asm(
+    asm volatile(
         "or x30, x30, %0\n\t"
-        : "=r"(led_reg)
+        : 
+        : "r"(led_reg)
+        : "x30"
     );
 }
 
 int main() {
-
-
     int hallSensorState = 0;
 
     while(1) {
-    
-    	asm(
+        asm volatile(
             "andi %0, x30, 1"
             : "=r"(hallSensorState)
+            :
+            :
         );
+
         // Read the state of the Hall sensor
         // hallSensorState = DigitalRead(HALL_SENSOR_PIN);
 
