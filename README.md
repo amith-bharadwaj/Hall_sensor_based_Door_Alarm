@@ -128,7 +128,7 @@ Follow the below commands for code conversion.
 
 ```
 riscv32-unknown-elf-gcc -march=rv32i -mabi=ilp32 -ffreestanding -nostdlib -o ./amith_door_alarm.o amith_door_alarm.c
-riscv32-unknown-elf-objdump -d -r out > door_alarm_assembly.txt
+riscv32-unknown-elf-objdump -d -r amith_door_alarm.o > door_alarm_assembly.txt
 ```
 ## Assembly Code
 
