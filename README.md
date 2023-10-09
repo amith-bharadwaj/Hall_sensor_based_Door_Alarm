@@ -134,78 +134,83 @@ riscv32-unknown-elf-objdump -d -r amith_door_alarm.o > door_alarm_assembly.txt
 
 ```
 
-amith_c.o:     file format elf32-littleriscv
+amith_door_alarm.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text:
 
-00010094 <alarm>:
-   10094:	fe010113          	add	sp,sp,-32
-   10098:	00812e23          	sw	s0,28(sp)
-   1009c:	02010413          	add	s0,sp,32
-   100a0:	000117b7          	lui	a5,0x11
-   100a4:	00100713          	li	a4,1
-   100a8:	18e7a423          	sw	a4,392(a5) # 11188 <__DATA_BEGIN__>
-   100ac:	000117b7          	lui	a5,0x11
-   100b0:	00100713          	li	a4,1
-   100b4:	18e7a623          	sw	a4,396(a5) # 1118c <LED>
-   100b8:	000117b7          	lui	a5,0x11
-   100bc:	1887a783          	lw	a5,392(a5) # 11188 <__DATA_BEGIN__>
-   100c0:	00179793          	sll	a5,a5,0x1
-   100c4:	fef42623          	sw	a5,-20(s0)
-   100c8:	fec42783          	lw	a5,-20(s0)
-   100cc:	00ff6f33          	or	t5,t5,a5
-   100d0:	000117b7          	lui	a5,0x11
-   100d4:	18c7a783          	lw	a5,396(a5) # 1118c <LED>
-   100d8:	00179793          	sll	a5,a5,0x1
-   100dc:	fef42423          	sw	a5,-24(s0)
-   100e0:	fe842783          	lw	a5,-24(s0)
-   100e4:	00ff6f33          	or	t5,t5,a5
-   100e8:	00000013          	nop
-   100ec:	01c12403          	lw	s0,28(sp)
-   100f0:	02010113          	add	sp,sp,32
-   100f4:	00008067          	ret
+00010074 <main>:
+   10074:	ff010113          	add	sp,sp,-16
+   10078:	00112623          	sw	ra,12(sp)
+   1007c:	00812423          	sw	s0,8(sp)
+   10080:	01010413          	add	s0,sp,16
+   10084:	0d4000ef          	jal	10158 <Read_Hall_Sensor>
+   10088:	ffdff06f          	j	10084 <main+0x10>
 
-000100f8 <turnOffAlarm>:
-   100f8:	fe010113          	add	sp,sp,-32
-   100fc:	00812e23          	sw	s0,28(sp)
-   10100:	02010413          	add	s0,sp,32
-   10104:	000117b7          	lui	a5,0x11
-   10108:	1807a423          	sw	zero,392(a5) # 11188 <__DATA_BEGIN__>
-   1010c:	000117b7          	lui	a5,0x11
-   10110:	1807a623          	sw	zero,396(a5) # 1118c <LED>
-   10114:	000117b7          	lui	a5,0x11
-   10118:	1887a783          	lw	a5,392(a5) # 11188 <__DATA_BEGIN__>
-   1011c:	00179793          	sll	a5,a5,0x1
-   10120:	fef42623          	sw	a5,-20(s0)
-   10124:	fec42783          	lw	a5,-20(s0)
-   10128:	00ff6f33          	or	t5,t5,a5
-   1012c:	000117b7          	lui	a5,0x11
-   10130:	18c7a783          	lw	a5,396(a5) # 1118c <LED>
-   10134:	00179793          	sll	a5,a5,0x1
-   10138:	fef42423          	sw	a5,-24(s0)
-   1013c:	fe842783          	lw	a5,-24(s0)
-   10140:	00ff6f33          	or	t5,t5,a5
-   10144:	00000013          	nop
-   10148:	01c12403          	lw	s0,28(sp)
-   1014c:	02010113          	add	sp,sp,32
-   10150:	00008067          	ret
+0001008c <Alarm_control>:
+   1008c:	fd010113          	add	sp,sp,-48
+   10090:	02812623          	sw	s0,44(sp)
+   10094:	03010413          	add	s0,sp,48
+   10098:	fe042623          	sw	zero,-20(s0)
+   1009c:	fe042423          	sw	zero,-24(s0)
+   100a0:	fec42783          	lw	a5,-20(s0)
+   100a4:	00179793          	sll	a5,a5,0x1
+   100a8:	fef42223          	sw	a5,-28(s0)
+   100ac:	fe442783          	lw	a5,-28(s0)
+   100b0:	00ff6f33          	or	t5,t5,a5
+   100b4:	fe842783          	lw	a5,-24(s0)
+   100b8:	00179793          	sll	a5,a5,0x1
+   100bc:	fef42023          	sw	a5,-32(s0)
+   100c0:	fe042783          	lw	a5,-32(s0)
+   100c4:	00ff6f33          	or	t5,t5,a5
+   100c8:	001f7793          	and	a5,t5,1
+   100cc:	fcf42e23          	sw	a5,-36(s0)
+   100d0:	fdc42703          	lw	a4,-36(s0)
+   100d4:	00100793          	li	a5,1
+   100d8:	02f71c63          	bne	a4,a5,10110 <Alarm_control+0x84>
+   100dc:	fe042623          	sw	zero,-20(s0)
+   100e0:	fe042423          	sw	zero,-24(s0)
+   100e4:	fec42783          	lw	a5,-20(s0)
+   100e8:	00179793          	sll	a5,a5,0x1
+   100ec:	fef42223          	sw	a5,-28(s0)
+   100f0:	fe442783          	lw	a5,-28(s0)
+   100f4:	00ff6f33          	or	t5,t5,a5
+   100f8:	fe842783          	lw	a5,-24(s0)
+   100fc:	00179793          	sll	a5,a5,0x1
+   10100:	fef42023          	sw	a5,-32(s0)
+   10104:	fe042783          	lw	a5,-32(s0)
+   10108:	00ff6f33          	or	t5,t5,a5
+   1010c:	03c0006f          	j	10148 <Alarm_control+0xbc>
+   10110:	00100793          	li	a5,1
+   10114:	fef42623          	sw	a5,-20(s0)
+   10118:	00100793          	li	a5,1
+   1011c:	fef42423          	sw	a5,-24(s0)
+   10120:	fec42783          	lw	a5,-20(s0)
+   10124:	00179793          	sll	a5,a5,0x1
+   10128:	fef42223          	sw	a5,-28(s0)
+   1012c:	fe442783          	lw	a5,-28(s0)
+   10130:	00ff6f33          	or	t5,t5,a5
+   10134:	fe842783          	lw	a5,-24(s0)
+   10138:	00179793          	sll	a5,a5,0x1
+   1013c:	fef42023          	sw	a5,-32(s0)
+   10140:	fe042783          	lw	a5,-32(s0)
+   10144:	00ff6f33          	or	t5,t5,a5
+   10148:	00000013          	nop
+   1014c:	02c12403          	lw	s0,44(sp)
+   10150:	03010113          	add	sp,sp,48
+   10154:	00008067          	ret
 
-00010154 <main>:
-   10154:	fe010113          	add	sp,sp,-32
-   10158:	00112e23          	sw	ra,28(sp)
-   1015c:	00812c23          	sw	s0,24(sp)
-   10160:	02010413          	add	s0,sp,32
-   10164:	fe042623          	sw	zero,-20(s0)
-   10168:	001f7793          	and	a5,t5,1
-   1016c:	fef42623          	sw	a5,-20(s0)
-   10170:	fec42783          	lw	a5,-20(s0)
-   10174:	00079663          	bnez	a5,10180 <main+0x2c>
-   10178:	f1dff0ef          	jal	10094 <alarm>
-   1017c:	fedff06f          	j	10168 <main+0x14>
-   10180:	f79ff0ef          	jal	100f8 <turnOffAlarm>
-   10184:	fe5ff06f          	j	10168 <main+0x14>
-
+00010158 <Read_Hall_Sensor>:
+   10158:	ff010113          	add	sp,sp,-16
+   1015c:	00112623          	sw	ra,12(sp)
+   10160:	00812423          	sw	s0,8(sp)
+   10164:	01010413          	add	s0,sp,16
+   10168:	f25ff0ef          	jal	1008c <Alarm_control>
+   1016c:	00000013          	nop
+   10170:	00c12083          	lw	ra,12(sp)
+   10174:	00812403          	lw	s0,8(sp)
+   10178:	01010113          	add	sp,sp,16
+   1017c:	00008067          	ret
 ```
 
 ## Number of Unique Instructions
