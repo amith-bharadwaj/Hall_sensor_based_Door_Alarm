@@ -21,83 +21,106 @@ A Hall sensor operates based on the Hall effect, where a voltage is generated ac
 ## C Program
 
 ```
-#include<stdio.h>
-int BUZZER, LED;
-void alarm() {
-    BUZZER = 1;
-    LED = 1;
-    //printf("Door Open! Magnet not Detected\n");
-
-    // Activate the alarm (sound buzzer, turn on LED)
-    int buzzer_reg;
-    buzzer_reg = BUZZER * 2;
-    asm volatile(
-        "or x30, x30, %0\n\t"
-        : 
-        : "r"(buzzer_reg)
-        : "x30"
-    );
-
-    int led_reg;
-    led_reg = LED * 2;
-    asm volatile(
-        "or x30, x30, %0\n\t"
-        : 
-        : "r"(led_reg)
-        : "x30"
-    );
-}
-
-void turnOffAlarm() {
-    BUZZER = 0;
-    LED = 0;
-    //printf("Door closed Magnet Detected\n");
-
-    // Turn off the alarm (stop buzzer, turn off LED)
-    int buzzer_reg;
-    buzzer_reg = BUZZER * 2;
-    asm volatile(
-        "or x30, x30, %0\n\t"
-        : 
-        : "r"(buzzer_reg)
-        : "x30"
-    );
-
-    int led_reg;
-    led_reg = LED * 2;
-    asm volatile(
-        "or x30, x30, %0\n\t"
-        : 
-        : "r"(led_reg)
-        : "x30"
-    );
-}
+void Read_Hall_Sensor();
+void Alarm_control();
 
 int main() {
-    int hallSensorState = 0;
+    while (1) {
+        Read_Hall_Sensor();
+    }
+    return 0;
+}
 
-    while(1) {
-        asm volatile(
-            "andi %0, x30, 1"
-            : "=r"(hallSensorState)
-            :
-            :
-        );
+// Fuction for controlling Alarm
+void Alarm_control() {
 
-        // Read the state of the Hall sensor
-        // hallSensorState = DigitalRead(HALL_SENSOR_PIN);
+    int HallSensorState; 
+    int buzzer=0; 
+    int buzzer_reg;
+    int led=0;
+    int led_reg;
+    
+    buzzer_reg = buzzer*2;
+     asm volatile(
+	"or x30, x30, %0\n\t" 
+	:
+	:"r"(buzzer_reg)
+	:"x30"
+	);
+    
+    led_reg = led*2;
+     asm volatile(
+	"or x30, x30, %0\n\t" 
+	:
+	:"r"(led_reg)
+	:"x30"
+	);
 
-        // Check if magnetic field is not detected meaning door open
-        if (hallSensorState == 0) {
-            alarm(); // Activate the alarm
-        }
+    
+    asm volatile(
+	"andi %0, x30, 1\n\t"
+	:"=r"(HallSensorState)
+	:
+	:
+	);
+
+        if (HallSensorState==1) {
+            // magnetic field detected means door locked no alarm
+            //printf("Door Locked No buzzer,No led");
+            buzzer=0;
+            led=0;
+            
+            buzzer_reg = buzzer*2;
+            
+            asm volatile(
+		"or x30, x30, %0\n\t" 
+		:
+		:"r"(buzzer_reg)
+		:"x30"
+		);
+		
+	    led_reg = led*2;
+	    
+            asm volatile(
+		"or x30, x30, %0\n\t" 
+		:
+		:"r"(led_reg)
+		:"x30"
+		);	
+        } 
+        
+        
         else {
-            turnOffAlarm();
+                    // magnetic field not detected means door unlocked switch on alarm
+            //printf("Door unlocked ON buzzer,ON led");
+            buzzer=1;
+            led=1;
+            
+            buzzer_reg = buzzer*2;
+            
+            asm volatile(
+		"or x30, x30, %0\n\t" 
+		:
+		:"r"(buzzer_reg)
+		:"x30"
+		);
+		
+	    led_reg = led*2;
+	    
+            asm volatile(
+		"or x30, x30, %0\n\t" 
+		:
+		:"r"(led_reg)
+		:"x30"
+		);	
         }
     }
 
-    return 0;
-}
+
+void Read_Hall_Sensor() {
+    Alarm_control();
+    }
+
 ```
 ## Assembly Code
 
