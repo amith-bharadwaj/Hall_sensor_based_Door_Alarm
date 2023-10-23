@@ -127,14 +127,16 @@ void Read_Hall_Sensor() {
 Follow the below commands for code conversion.
 
 ```
-riscv32-unknown-elf-gcc -march=rv32i -mabi=ilp32 -ffreestanding -nostdlib -o ./amith_door_alarm.o amith_door_alarm.c
-riscv32-unknown-elf-objdump -d -r amith_door_alarm.o > door_alarm_assembly.txt
+riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -ffreestanding -nostdlib -o hall_sensor.out hall_sensor.c 
+riscv64-unknown-elf-objdump -d -r hall_sensor.out > asm.txt
+
+10:44
+
 ```
 ## Assembly Code
-
 ```
 
-amith_door_alarm.o:     file format elf32-littleriscv
+hall_sensor.out:     file format elf32-littleriscv
 
 
 Disassembly of section .text:
@@ -218,21 +220,22 @@ Disassembly of section .text:
 ```
 Number of different instructions: 12
 List of unique instructions:
-ret
-lw
-and
-nop
-jal
 add
-j
-or
-bne
-li
+nop
 sw
+and
+jal
 sll
+bne
+or
+li
+ret
+j
+lw
 
 ```
-![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/afa7b9a7-b7b0-4b5c-801d-e1a613337ef8)
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/f0029fa4-0457-409a-b3c9-fcb5bcba82a0)
+
 
 
 ## References
