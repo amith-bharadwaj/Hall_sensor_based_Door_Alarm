@@ -21,221 +21,172 @@ A Hall sensor operates based on the Hall effect, where a voltage is generated ac
 ## C Program
 
 ```
-void Read_Hall_Sensor();
-void Alarm_control();
-
 int main() {
-    while (1) {
-        Read_Hall_Sensor();
-    }
-    return 0;
-}
 
-// Fuction for controlling Alarm
-void Alarm_control() {
+   // Replace these variables with sensor pins and setup environment
+      int control_switch;
+      int hall_sensor;
+      int buzzer=0; 
+      int buzzer_reg = buzzer*4;
+      int led=0; 
+      int led_reg = led *8;
 
-    int HallSensorState; 
-    int buzzer=0; 
-    int buzzer_reg;
-    int led=0;
-    int led_reg;
-    
-    buzzer_reg = buzzer*2;
-     asm volatile(
+  
+    	    
+  asm volatile(
 	"or x30, x30, %0\n\t" 
+	"or x30, x30, %1\n\t"
 	:
-	:"r"(buzzer_reg)
-	:"x30"
-	);
-    
-    led_reg = led*2;
-     asm volatile(
-	"or x30, x30, %0\n\t" 
-	:
-	:"r"(led_reg)
+	:"r"(buzzer_reg), "r"(led_reg)
 	:"x30"
 	);
 
+
+  while(1) {
+
+	  asm volatile(
+        	"andi %0, x30, 1\n\t"
+	
+        	:"=r"(control_switch)
+		:
+		:
+ 	);
+
+          if (control_switch) {
+
+		asm volatile(
+        		"andi %0, x30, 2\n\t"
+			:"=r"(hall_sensor)
+        		:
+        		:
+	 	);
+
+	if(hall_sensor){
+	    // door closed
+  
+              // buzzer = digitalwrite(0);
+              //printf("Buzzer is OFF");
+	
+	buzzer = 0;
+  	
+	led = 0;
+  	
+	  } 
+
+	  
+	  else {
+          
+              //hall_sensor = digital_read(0);         
+              // DOOR OPEN
+              // buzzer = digitalWrite(1)
+              //printf("Buzzer is ON\n");
+
+	buzzer = 1;
+	led=1;	
+	  }
     
-    asm volatile(
-	"andi %0, x30, 1\n\t"
-	:"=r"(HallSensorState)
+	buzzer_reg = buzzer*4;
+	led_reg = led*8;
+
+
+	asm volatile(
+	"or x30, x30, %0 \n\t"
+        "or x30, x30, %1 \n\t"
 	:
-	:
-	);
+	:"r"(buzzer_reg), "r"(led_reg)
+        :"x30"
+        );
 
-        if (HallSensorState==1) {
-            // magnetic field detected means door locked no alarm
-            //printf("Door Locked No buzzer,No led");
-            buzzer=0;
-            led=0;
-            
-            buzzer_reg = buzzer*2;
-            
-            asm volatile(
-		"or x30, x30, %0\n\t" 
-		:
-		:"r"(buzzer_reg)
-		:"x30"
-		);
-		
-	    led_reg = led*2;
-	    
-            asm volatile(
-		"or x30, x30, %0\n\t" 
-		:
-		:"r"(led_reg)
-		:"x30"
-		);	
-        } 
-        
-        
-        else {
-                    // magnetic field not detected means door unlocked switch on alarm
-            //printf("Door unlocked ON buzzer,ON led");
-            buzzer=1;
-            led=1;
-            
-            buzzer_reg = buzzer*2;
-            
-            asm volatile(
-		"or x30, x30, %0\n\t" 
-		:
-		:"r"(buzzer_reg)
-		:"x30"
-		);
-		
-	    led_reg = led*2;
-	    
-            asm volatile(
-		"or x30, x30, %0\n\t" 
-		:
-		:"r"(led_reg)
-		:"x30"
-		);	
-        }
-    }
+          }
+      }
+  
+  
+ return 0;
 
-
-void Read_Hall_Sensor() {
-    Alarm_control();
-    }
-
+ }
+	
 ```
 ## Commands to Convert C program to Assembly Code
 
 Follow the below commands for code conversion.
 
 ```
-riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -ffreestanding -nostdlib -o hall_sensor.out hall_sensor.c 
-riscv64-unknown-elf-objdump -d -r hall_sensor.out > asm.txt
+riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -ffreestanding -nostdlib -o ./out hall_sensor.c 
+riscv64-unknown-elf-objdump -d -r out > asm.txt
 
-10:44
+
 
 ```
 ## Assembly Code
 ```
 
-hall_sensor.out:     file format elf32-littleriscv
+out:     file format elf32-littleriscv
 
 
 Disassembly of section .text:
 
-00010074 <main>:
-   10074:	ff010113          	add	sp,sp,-16
-   10078:	00112623          	sw	ra,12(sp)
-   1007c:	00812423          	sw	s0,8(sp)
-   10080:	01010413          	add	s0,sp,16
-   10084:	0d4000ef          	jal	10158 <Read_Hall_Sensor>
-   10088:	ffdff06f          	j	10084 <main+0x10>
-
-0001008c <Alarm_control>:
-   1008c:	fd010113          	add	sp,sp,-48
-   10090:	02812623          	sw	s0,44(sp)
-   10094:	03010413          	add	s0,sp,48
-   10098:	fe042623          	sw	zero,-20(s0)
-   1009c:	fe042423          	sw	zero,-24(s0)
-   100a0:	fec42783          	lw	a5,-20(s0)
-   100a4:	00179793          	sll	a5,a5,0x1
-   100a8:	fef42223          	sw	a5,-28(s0)
-   100ac:	fe442783          	lw	a5,-28(s0)
-   100b0:	00ff6f33          	or	t5,t5,a5
-   100b4:	fe842783          	lw	a5,-24(s0)
-   100b8:	00179793          	sll	a5,a5,0x1
-   100bc:	fef42023          	sw	a5,-32(s0)
-   100c0:	fe042783          	lw	a5,-32(s0)
-   100c4:	00ff6f33          	or	t5,t5,a5
-   100c8:	001f7793          	and	a5,t5,1
-   100cc:	fcf42e23          	sw	a5,-36(s0)
-   100d0:	fdc42703          	lw	a4,-36(s0)
-   100d4:	00100793          	li	a5,1
-   100d8:	02f71c63          	bne	a4,a5,10110 <Alarm_control+0x84>
-   100dc:	fe042623          	sw	zero,-20(s0)
-   100e0:	fe042423          	sw	zero,-24(s0)
-   100e4:	fec42783          	lw	a5,-20(s0)
-   100e8:	00179793          	sll	a5,a5,0x1
-   100ec:	fef42223          	sw	a5,-28(s0)
-   100f0:	fe442783          	lw	a5,-28(s0)
-   100f4:	00ff6f33          	or	t5,t5,a5
-   100f8:	fe842783          	lw	a5,-24(s0)
-   100fc:	00179793          	sll	a5,a5,0x1
-   10100:	fef42023          	sw	a5,-32(s0)
-   10104:	fe042783          	lw	a5,-32(s0)
-   10108:	00ff6f33          	or	t5,t5,a5
-   1010c:	03c0006f          	j	10148 <Alarm_control+0xbc>
-   10110:	00100793          	li	a5,1
-   10114:	fef42623          	sw	a5,-20(s0)
-   10118:	00100793          	li	a5,1
-   1011c:	fef42423          	sw	a5,-24(s0)
-   10120:	fec42783          	lw	a5,-20(s0)
-   10124:	00179793          	sll	a5,a5,0x1
-   10128:	fef42223          	sw	a5,-28(s0)
-   1012c:	fe442783          	lw	a5,-28(s0)
-   10130:	00ff6f33          	or	t5,t5,a5
-   10134:	fe842783          	lw	a5,-24(s0)
-   10138:	00179793          	sll	a5,a5,0x1
-   1013c:	fef42023          	sw	a5,-32(s0)
-   10140:	fe042783          	lw	a5,-32(s0)
-   10144:	00ff6f33          	or	t5,t5,a5
-   10148:	00000013          	nop
-   1014c:	02c12403          	lw	s0,44(sp)
-   10150:	03010113          	add	sp,sp,48
-   10154:	00008067          	ret
-
-00010158 <Read_Hall_Sensor>:
-   10158:	ff010113          	add	sp,sp,-16
-   1015c:	00112623          	sw	ra,12(sp)
-   10160:	00812423          	sw	s0,8(sp)
-   10164:	01010413          	add	s0,sp,16
-   10168:	f25ff0ef          	jal	1008c <Alarm_control>
-   1016c:	00000013          	nop
-   10170:	00c12083          	lw	ra,12(sp)
-   10174:	00812403          	lw	s0,8(sp)
-   10178:	01010113          	add	sp,sp,16
-   1017c:	00008067          	ret
+00010054 <main>:
+   10054:	fd010113          	addi	sp,sp,-48
+   10058:	02812623          	sw	s0,44(sp)
+   1005c:	03010413          	addi	s0,sp,48
+   10060:	fe042623          	sw	zero,-20(s0)
+   10064:	fec42783          	lw	a5,-20(s0)
+   10068:	00279793          	slli	a5,a5,0x2
+   1006c:	fef42223          	sw	a5,-28(s0)
+   10070:	fe042423          	sw	zero,-24(s0)
+   10074:	fe842783          	lw	a5,-24(s0)
+   10078:	00379793          	slli	a5,a5,0x3
+   1007c:	fef42023          	sw	a5,-32(s0)
+   10080:	fe442783          	lw	a5,-28(s0)
+   10084:	fe042703          	lw	a4,-32(s0)
+   10088:	00ff6f33          	or	t5,t5,a5
+   1008c:	00ef6f33          	or	t5,t5,a4
+   10090:	001f7793          	andi	a5,t5,1
+   10094:	fcf42e23          	sw	a5,-36(s0)
+   10098:	fdc42783          	lw	a5,-36(s0)
+   1009c:	fe078ae3          	beqz	a5,10090 <main+0x3c>
+   100a0:	002f7793          	andi	a5,t5,2
+   100a4:	fcf42c23          	sw	a5,-40(s0)
+   100a8:	fd842783          	lw	a5,-40(s0)
+   100ac:	00078863          	beqz	a5,100bc <main+0x68>
+   100b0:	fe042623          	sw	zero,-20(s0)
+   100b4:	fe042423          	sw	zero,-24(s0)
+   100b8:	0140006f          	j	100cc <main+0x78>
+   100bc:	00100793          	li	a5,1
+   100c0:	fef42623          	sw	a5,-20(s0)
+   100c4:	00100793          	li	a5,1
+   100c8:	fef42423          	sw	a5,-24(s0)
+   100cc:	fec42783          	lw	a5,-20(s0)
+   100d0:	00279793          	slli	a5,a5,0x2
+   100d4:	fef42223          	sw	a5,-28(s0)
+   100d8:	fe842783          	lw	a5,-24(s0)
+   100dc:	00379793          	slli	a5,a5,0x3
+   100e0:	fef42023          	sw	a5,-32(s0)
+   100e4:	fe442783          	lw	a5,-28(s0)
+   100e8:	fe042703          	lw	a4,-32(s0)
+   100ec:	00ff6f33          	or	t5,t5,a5
+   100f0:	00ef6f33          	or	t5,t5,a4
+   100f4:	f9dff06f          	j	10090 <main+0x3c>
 ```
 
 ## Number of Unique Instructions
 
 ```
-Number of different instructions: 12
+Number of different instructions: 9
 List of unique instructions:
-add
-nop
-sw
-and
-jal
-sll
-bne
 or
+andi
 li
-ret
+sw
 j
 lw
+addi
+slli
+beqz
+
 
 ```
-![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/f0029fa4-0457-409a-b3c9-fcb5bcba82a0)
-
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/ccca128c-a8bd-4d2a-b4a0-74ced2411bd1)
 
 
 ## References
