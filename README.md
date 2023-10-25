@@ -61,7 +61,7 @@ int main() {
 //int k;
 //for(k=0;k<1;k++)
    //printf("entering the while loop\n");
-  //while(1) 
+  while(1) 
   {
 	  asm volatile(
         	"andi %0, x30, 1\n\t"
