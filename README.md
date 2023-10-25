@@ -21,91 +21,143 @@ A Hall sensor operates based on the Hall effect, where a voltage is generated ac
 ## C Program
 
 ```
+//#include <stdio.h>
+//#include<stdlib.h>
+
 int main() {
 
-   // Replace these variables with sensor pins and setup environment
-      int control_switch;
+      //printf("entering main function\n");
+      int control;
       int hall_sensor;
-      int buzzer=0; 
+      int buzzer=0;
       int buzzer_reg = buzzer*4;
-      int led=0; 
-      int led_reg = led *8;
-
-  
-    	    
-  asm volatile(
+      int led=0;
+      int led_reg = led*8;
+      int mask = 0xFFFFFFF3;
+      
+      //int reg_check,control_check,sensor_check,test_reg;
+   	    
+ asm volatile(
+	
+	"and x30, x30, %2\n\t"	 
 	"or x30, x30, %0\n\t" 
 	"or x30, x30, %1\n\t"
 	:
-	:"r"(buzzer_reg), "r"(led_reg)
+	:"r"(buzzer_reg), "r"(led_reg), "r"(mask)
 	:"x30"
+      );
+	
+		/* asm volatile(
+		"addi x30, x30, 0\n\t"
+		:"=r"(reg_check)
+		:
+		:"x30"
 	);
-
-
-  while(1) {
-
+	
+ 	//printf("reg_check is %d\n",reg_check);
+        //printf("hall_sensor = %d, control=%d, buzzer = %d, led=%d\n", hall_sensor,control, buzzer_reg,led_reg);
+       */ 
+        		   	
+//int k;
+//for(k=0;k<1;k++)
+   //printf("entering the while loop\n");
+  //while(1) 
+  {
 	  asm volatile(
         	"andi %0, x30, 1\n\t"
-	
-        	:"=r"(control_switch)
+	        :"=r"(control)
 		:
 		:
- 	);
+ 	);  
+ 	
+/*
+	asm volatile(
+    	"addi %0, x30, 0\n\t"
+    	:"=r"(control_check)
+    	:
+    	:"x30"
+    	);
+    	//printf("control_check = %d\n",control_check);
+    	//printf("control value = %d\n",control);
+        */
+	 	
+	 	 
+         control = 0;
+        //printf("control value is updated as  %d\n",control);
+         
+      if (control) {   
 
-          if (control_switch) {
-
+              //printf("control is 1 therefore inside if loop \n");            
+              
 		asm volatile(
         		"andi %0, x30, 2\n\t"
 			:"=r"(hall_sensor)
         		:
         		:
-	 	);
-
-	if(hall_sensor){
-	    // door closed
-  
-              // buzzer = digitalwrite(0);
-              //printf("Buzzer is OFF");
+	 	);  
+   /*
+ 	        asm volatile(
+    		  "addi %0, x30, 0\n\t"
+    		  :"=r"(sensor_check)
+    		  :
+    		  :"x30"
+    		);
+	        //printf("sensor_check = %d\n",sensor_check);
 	
-	buzzer = 0;
-  	
-	led = 0;
-  	
-	  } 
 
+ */
+              
+              hall_sensor =1;
+	        if(hall_sensor){
+           //printf("hall sensor is 1 therefore inside if loop\n");
+           //printf("Door Closed, Buzzer = OFF , led = OFF\n ");
+	
+	            buzzer = 0;
+	            led = 0;  	
+	  } 
 	  
 	  else {
-          
-              //hall_sensor = digital_read(0);         
-              // DOOR OPEN
-              // buzzer = digitalWrite(1)
-              //printf("Buzzer is ON\n");
+             //printf("hall sensor is 0 therefore else is executed\n");                          
+             //printf("Door Open!, Buzzer = ON, led =ON\n");
 
-	buzzer = 1;
-	led=1;	
-	  }
+	    buzzer =1;
+	    led=1;
+	    
+	    }
+	    
+
+//Updating registers for buzzer and led
     
 	buzzer_reg = buzzer*4;
 	led_reg = led*8;
-
-
-	asm volatile(
-	"or x30, x30, %0 \n\t"
-        "or x30, x30, %1 \n\t"
-	:
-	:"r"(buzzer_reg), "r"(led_reg)
-        :"x30"
-        );
-
-          }
-      }
-  
-  
- return 0;
-
- }
 	
+	asm volatile(
+	    "and x30, x30, %2\n\t"
+	    "or x30, x30, %0 \n\t"
+            "or x30, x30, %1 \n\t"
+	    :
+	    :"r"(buzzer_reg), "r"(led_reg), "r"(mask)
+            :"x30"
+          );	          
+                   
+  /*               
+  asm volatile(
+    	"addi %0, x30, 0\n\t"
+    	:"=r"(test_reg)
+    	:
+    	:"x30"
+    	);
+    	//printf("test_reg = %d\n",test_reg);
+    //printf("hall_sensor = %d, control =%d, buzzer = %d,  led=%d\n",hall_sensor,control,buzzer_reg,led_reg);
+*/
+
+        }
+ } 
+
+ return 0;
+}
 ```
+
 ## Commands to Convert C program to Assembly Code
 
 Follow the below commands for code conversion.
@@ -114,13 +166,11 @@ Follow the below commands for code conversion.
 riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -ffreestanding -nostdlib -o ./out hall_sensor.c 
 riscv64-unknown-elf-objdump -d -r out > asm.txt
 
-
-
 ```
 ## Assembly Code
-```
 
-out:     file format elf32-littleriscv
+```
+out7:     file format elf32-littleriscv
 
 
 Disassembly of section .text:
@@ -137,57 +187,85 @@ Disassembly of section .text:
    10074:	fe842783          	lw	a5,-24(s0)
    10078:	00379793          	slli	a5,a5,0x3
    1007c:	fef42023          	sw	a5,-32(s0)
-   10080:	fe442783          	lw	a5,-28(s0)
-   10084:	fe042703          	lw	a4,-32(s0)
-   10088:	00ff6f33          	or	t5,t5,a5
-   1008c:	00ef6f33          	or	t5,t5,a4
-   10090:	001f7793          	andi	a5,t5,1
-   10094:	fcf42e23          	sw	a5,-36(s0)
-   10098:	fdc42783          	lw	a5,-36(s0)
-   1009c:	fe078ae3          	beqz	a5,10090 <main+0x3c>
-   100a0:	002f7793          	andi	a5,t5,2
+   10080:	ff300793          	li	a5,-13
+   10084:	fcf42e23          	sw	a5,-36(s0)
+   10088:	fe442783          	lw	a5,-28(s0)
+   1008c:	fe042703          	lw	a4,-32(s0)
+   10090:	fdc42683          	lw	a3,-36(s0)
+   10094:	00df7f33          	and	t5,t5,a3
+   10098:	00ff6f33          	or	t5,t5,a5
+   1009c:	00ef6f33          	or	t5,t5,a4
+   100a0:	001f7793          	andi	a5,t5,1
    100a4:	fcf42c23          	sw	a5,-40(s0)
-   100a8:	fd842783          	lw	a5,-40(s0)
-   100ac:	00078863          	beqz	a5,100bc <main+0x68>
-   100b0:	fe042623          	sw	zero,-20(s0)
-   100b4:	fe042423          	sw	zero,-24(s0)
-   100b8:	0140006f          	j	100cc <main+0x78>
+   100a8:	fc042c23          	sw	zero,-40(s0)
+   100ac:	fd842783          	lw	a5,-40(s0)
+   100b0:	fe0788e3          	beqz	a5,100a0 <main+0x4c>
+   100b4:	002f7793          	andi	a5,t5,2
+   100b8:	fcf42a23          	sw	a5,-44(s0)
    100bc:	00100793          	li	a5,1
-   100c0:	fef42623          	sw	a5,-20(s0)
-   100c4:	00100793          	li	a5,1
-   100c8:	fef42423          	sw	a5,-24(s0)
-   100cc:	fec42783          	lw	a5,-20(s0)
-   100d0:	00279793          	slli	a5,a5,0x2
-   100d4:	fef42223          	sw	a5,-28(s0)
-   100d8:	fe842783          	lw	a5,-24(s0)
-   100dc:	00379793          	slli	a5,a5,0x3
-   100e0:	fef42023          	sw	a5,-32(s0)
-   100e4:	fe442783          	lw	a5,-28(s0)
-   100e8:	fe042703          	lw	a4,-32(s0)
-   100ec:	00ff6f33          	or	t5,t5,a5
-   100f0:	00ef6f33          	or	t5,t5,a4
-   100f4:	f9dff06f          	j	10090 <main+0x3c>
+   100c0:	fcf42a23          	sw	a5,-44(s0)
+   100c4:	fd442783          	lw	a5,-44(s0)
+   100c8:	00078863          	beqz	a5,100d8 <main+0x84>
+   100cc:	fe042623          	sw	zero,-20(s0)
+   100d0:	fe042423          	sw	zero,-24(s0)
+   100d4:	0140006f          	j	100e8 <main+0x94>
+   100d8:	00100793          	li	a5,1
+   100dc:	fef42623          	sw	a5,-20(s0)
+   100e0:	00100793          	li	a5,1
+   100e4:	fef42423          	sw	a5,-24(s0)
+   100e8:	fec42783          	lw	a5,-20(s0)
+   100ec:	00279793          	slli	a5,a5,0x2
+   100f0:	fef42223          	sw	a5,-28(s0)
+   100f4:	fe842783          	lw	a5,-24(s0)
+   100f8:	00379793          	slli	a5,a5,0x3
+   100fc:	fef42023          	sw	a5,-32(s0)
+   10100:	fe442783          	lw	a5,-28(s0)
+   10104:	fe042703          	lw	a4,-32(s0)
+   10108:	fdc42683          	lw	a3,-36(s0)
+   1010c:	00df7f33          	and	t5,t5,a3
+   10110:	00ff6f33          	or	t5,t5,a5
+   10114:	00ef6f33          	or	t5,t5,a4
+   10118:	f89ff06f          	j	100a0 <main+0x4c>
 ```
+
 
 ## Number of Unique Instructions
 
 ```
-Number of different instructions: 9
+Number of different instructions: 10
 List of unique instructions:
-or
-andi
-li
+and
 sw
-j
-lw
-addi
-slli
+andi
+or
 beqz
+slli
+j
+addi
+li
+lw
 
 
 ```
-![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/ccca128c-a8bd-4d2a-b4a0-74ced2411bd1)
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/fe6e1717-652d-423f-aa19-63be79b949fd)
 
+## Spike Results
+
+### Case 1
+In this case,the control value is updated as 1, therefore it enters the if loop and checks for the sensor value. As the hall sensor is 0, the second else statement is executed where it is notified that door is open so buzzer and led will be switched ON.
+
+![Screenshot from 2023-10-25 14-12-31](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/8d55731f-b2b1-493b-9438-49d90e21477a)
+
+### Case 2
+
+In this case,the control value is updated as 1,therefore it enters the if loop and checks for the sensor value. As the hall sensor is 1, the second if loop is executed where it is notified that door is closed so buzzer and led will be switched OFF.
+
+![Screenshot from 2023-10-25 14-14-13](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/1a7830e6-8af0-4556-9db9-ad3aa633c4a9)
+
+### Case 3
+In this case,the control switch is OFF, here control value is given as 0. Therefore it does not proceed further in detecting the sensor value.
+
+![Screenshot from 2023-10-25 14-19-56](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/b602925e-d822-4330-8d91-cd9b8db283b3)
 
 ## References
 
