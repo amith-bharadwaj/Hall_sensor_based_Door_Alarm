@@ -267,6 +267,23 @@ In this case,the control switch is OFF, here control value is given as 0. Theref
 
 ![Screenshot from 2023-10-25 14-19-56](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/b602925e-d822-4330-8d91-cd9b8db283b3)
 
+## Functional Simulation
+
+To verify the functionality of the Verilog code generated for the processor chip, we will conduct a functional simulation. This involves testing the processor with a range of input combinations and then comparing the resulting output with the expected values to ensure proper operation.
+
+### Case 1
+
+Here in this example, the inputs are control_switch = 1, Hall_sensor_value = 1. As the control switch is ON the system will start working now, as the hall sensor value is 1 , it means that the magnetic field is detected , hence the door is Closed. So the Buzzer and LED should be in OFF state. (Buzzer=0 , LED =0 ). The same is observed as a 2 bit output variable in the waveform.
+
+![Screenshot from 2023-10-28 11-13-38](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/d889dcae-f13e-4552-acef-3790636c0fae)
+
+### Case 2
+Here in this example, the inputs are control_switch = 1, Hall_sensor_value = 0. As the control switch is ON the system will start working now, as the hall sensor value is 0 , it means that the magnetic field is not detected , hence the door is open. So the Buzzer and LED should be in ON state. (Buzzer=1 , LED =1 ). The same is observed as a 2 bit output variable in the waveform.
+
+
+
+
+
 ## References
 
 1. https://github.com/SakethGajawada/RISCV_GNU
