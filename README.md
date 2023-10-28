@@ -16,6 +16,8 @@ A Hall sensor operates based on the Hall effect, where a voltage is generated ac
 
 ![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/2db483ca-2c8e-4313-b2eb-daa7a3ec7052)
 
+Here there are 2 inputs Power Supply switch which is the main control switch and Hall effect sensor. The two outputs are Buzzer and LED. 
+
 ## Schematic
 
 ![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/408eeda4-4e64-4084-9224-1efe63478635)
