@@ -294,8 +294,13 @@ In this case, the inputs are control_switch = 0, Hall_sensor_value = 0. As the c
 
 Here, Signal43, Signal45, and Signal58 serve as registers with specific functionalities.Signal43 contains the hardwired wire zero register, referred to as x0.Signal45 is designated as the register for the stack pointer, denoted as x2.Signal58 is associated with the a5 register.
 
-In the image below,the operation performed is the first instruction ''' addi sp,sp,-48 ```.
+In the image below,the operation performed is the first instruction "addi sp,sp,-48".
+
 ![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/ff2b9cbd-f7d0-4a6c-bdf9-8eab289ef58e)
+
+In the image below we can see the instruction li a5,-13 being performed in the register file x58.The previous value is zero and the result obtained is -13 in hexadecimal.
+
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/62eb122c-0a4f-499b-aca0-33c5f6597fee)
 
 
 ## References
