@@ -2,7 +2,7 @@
 
 ## Functionality of the system
 
-A Hall sensor-based door alarm system is an electronic security device designed to monitor and detect the opening or closing of a door. It utilizes a Hall effect sensor, a specialized transducer that responds to changes in magnetic fields. In this context, the Hall sensor is strategically positioned in close proximity to a magnet that is affixed to either the door or the door frame. When the door is closed, the magnet aligns with the Hall sensor, creating a stable magnetic field. However, when the door is opened, the magnet moves away, causing a disruption in the magnetic field. This alteration triggers the Hall sensor to register a change in its output state. The system is programmed to recognize this transition and respond by activating an alarm, in the form of a buzzer alert. This setup serves as a simple yet effective means of enhancing security by providing an immediate alert in the event of unauthorized entry or tampering with the door. 
+A Hall sensor-based door alarm system is an electronic security device designed to monitor and detect the opening or closing of a door. It utilizes a Hall effect sensor, a specialized transducer that responds to changes in magnetic fields. In this context, the Hall sensor is strategically positioned in close proximity to a magnet that is affixed to either the door or the door frame. When the door is closed, the magnet aligns with the Hall sensor, creating a stable magnetic field. However, when the door is opened, the magnet moves away, causing a disruption in the magnetic field. This alteration triggers the Hall sensor to register a change in its output state. The system is programmed to recognize this transition and respond by activating an alarm, in the form of a buzzer alert. This setup serves as a simple yet effective means of enhancing security by providing an immediate alert in the event of unauthorized entry or tampering with the door. Hall-effect sensor gives output a low voltage when the magnet is near, and high voltage when the magnet is away.
 
 ## Working of Hall sensor 
 
@@ -112,16 +112,16 @@ int main() {
            //printf("hall sensor is 1 therefore inside if loop\n");
            //printf("Door Closed, Buzzer = OFF , led = OFF\n ");
 	
-	            buzzer = 0;
-	            led = 0;  	
+	            buzzer = 1;
+	            led = 1;  	
 	  } 
 	  
 	  else {
              //printf("hall sensor is 0 therefore else is executed\n");                          
              //printf("Door Open!, Buzzer = ON, led =ON\n");
 
-	    buzzer =1;
-	    led=1;
+	    buzzer =0;
+	    led=0;
 	    
 	    }
 	    
@@ -252,13 +252,13 @@ lw
 ## Spike Results
 
 ### Case 1
-In this case,the control value is updated as 1, therefore it enters the if loop and checks for the sensor value. As the hall sensor is 0, the second else statement is executed where it is notified that door is open so buzzer and led will be switched ON.
+In this case,the control value is updated as 1, therefore it enters the if loop and checks for the sensor value. As the hall sensor is 1, the second else statement is executed where it is notified that door is open so buzzer and led will be switched ON.
 
 ![Screenshot from 2023-10-25 14-12-31](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/8d55731f-b2b1-493b-9438-49d90e21477a)
 
 ### Case 2
 
-In this case,the control value is updated as 1,therefore it enters the if loop and checks for the sensor value. As the hall sensor is 1, the second if loop is executed where it is notified that door is closed so buzzer and led will be switched OFF.
+In this case,the control value is updated as 1,therefore it enters the if loop and checks for the sensor value. As the hall sensor is 0, the second if loop is executed where it is notified that door is closed so buzzer and led will be switched OFF.
 
 ![Screenshot from 2023-10-25 14-14-13](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/1a7830e6-8af0-4556-9db9-ad3aa633c4a9)
 
