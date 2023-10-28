@@ -252,13 +252,13 @@ lw
 ## Spike Results
 
 ### Case 1
-In this case,the control value is updated as 1, therefore it enters the if loop and checks for the sensor value. As the hall sensor is 1, the second else statement is executed where it is notified that door is open so buzzer and led will be switched ON.
+In this case,the control value is updated as 1, therefore it enters the if loop and checks for the sensor value. As the hall sensor is 1, the if loop is executed where it is notified that door is open so buzzer and led will be switched ON.
 
 ![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/5bf553c3-5f58-47bf-a9c1-ee9081d3b5b7)
 
 ### Case 2
 
-In this case,the control value is updated as 1,therefore it enters the if loop and checks for the sensor value. As the hall sensor is 0, the second if loop is executed where it is notified that door is closed so buzzer and led will be switched OFF.
+In this case,the control value is updated as 1,therefore it enters the if loop and checks for the sensor value. As the hall sensor is 0, the second else statement is executed where it is notified that door is closed so buzzer and led will be switched OFF.
 
 ![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/9b9f7efc-df48-4a4e-9bb7-753c51dcd2c0)
 
