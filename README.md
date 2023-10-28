@@ -275,11 +275,15 @@ To verify the functionality of the Verilog code generated for the processor chip
 
 Here in this example, the inputs are control_switch = 1, Hall_sensor_value = 0. As the control switch is ON the system will start working now, as the hall sensor value is 0 ,since hall sensor value is a active low signal, it means that the magnetic field is detected , hence the door is Closed. So the Buzzer and LED should be in OFF state. (Buzzer=0 , LED =0 ). The same is observed as a 2 bit output variable in the waveform.
 
-![Screenshot from 2023-10-28 11-13-38](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/d889dcae-f13e-4552-acef-3790636c0fae)
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/75caf6f9-9070-4d0a-ba7e-283207b683c0)
 
 ### Case 2
 Here in this example, the inputs are control_switch = 1, Hall_sensor_value = 1. As the control switch is ON the system will start working now, as the hall sensor value is 1 , it means that the magnetic field is not detected , hence the door is open. So the Buzzer and LED should be in ON state. (Buzzer=1 , LED =1 ). The same is observed as a 2 bit output variable in the waveform.
 
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/1a64f64d-bee2-4f70-8396-50ec87eac172)
+
+
+### Case 3
 
 
 
