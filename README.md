@@ -173,7 +173,7 @@ riscv64-unknown-elf-objdump -d -r out > asm.txt
 ## Assembly Code
 
 ```
-out7:     file format elf32-littleriscv
+outfile:     file format elf32-littleriscv
 
 
 Disassembly of section .text:
@@ -200,35 +200,32 @@ Disassembly of section .text:
    1009c:	00ef6f33          	or	t5,t5,a4
    100a0:	001f7793          	andi	a5,t5,1
    100a4:	fcf42c23          	sw	a5,-40(s0)
-   100a8:	fc042c23          	sw	zero,-40(s0)
-   100ac:	fd842783          	lw	a5,-40(s0)
-   100b0:	fe0788e3          	beqz	a5,100a0 <main+0x4c>
-   100b4:	002f7793          	andi	a5,t5,2
-   100b8:	fcf42a23          	sw	a5,-44(s0)
-   100bc:	00100793          	li	a5,1
-   100c0:	fcf42a23          	sw	a5,-44(s0)
-   100c4:	fd442783          	lw	a5,-44(s0)
-   100c8:	00078863          	beqz	a5,100d8 <main+0x84>
-   100cc:	fe042623          	sw	zero,-20(s0)
-   100d0:	fe042423          	sw	zero,-24(s0)
-   100d4:	0140006f          	j	100e8 <main+0x94>
-   100d8:	00100793          	li	a5,1
-   100dc:	fef42623          	sw	a5,-20(s0)
-   100e0:	00100793          	li	a5,1
-   100e4:	fef42423          	sw	a5,-24(s0)
-   100e8:	fec42783          	lw	a5,-20(s0)
-   100ec:	00279793          	slli	a5,a5,0x2
-   100f0:	fef42223          	sw	a5,-28(s0)
-   100f4:	fe842783          	lw	a5,-24(s0)
-   100f8:	00379793          	slli	a5,a5,0x3
-   100fc:	fef42023          	sw	a5,-32(s0)
-   10100:	fe442783          	lw	a5,-28(s0)
-   10104:	fe042703          	lw	a4,-32(s0)
-   10108:	fdc42683          	lw	a3,-36(s0)
-   1010c:	00df7f33          	and	t5,t5,a3
-   10110:	00ff6f33          	or	t5,t5,a5
-   10114:	00ef6f33          	or	t5,t5,a4
-   10118:	f89ff06f          	j	100a0 <main+0x4c>
+   100a8:	fd842783          	lw	a5,-40(s0)
+   100ac:	fe078ae3          	beqz	a5,100a0 <main+0x4c>
+   100b0:	002f7793          	andi	a5,t5,2
+   100b4:	fcf42a23          	sw	a5,-44(s0)
+   100b8:	fd442783          	lw	a5,-44(s0)
+   100bc:	00078c63          	beqz	a5,100d4 <main+0x80>
+   100c0:	00100793          	li	a5,1
+   100c4:	fef42623          	sw	a5,-20(s0)
+   100c8:	00100793          	li	a5,1
+   100cc:	fef42423          	sw	a5,-24(s0)
+   100d0:	00c0006f          	j	100dc <main+0x88>
+   100d4:	fe042623          	sw	zero,-20(s0)
+   100d8:	fe042423          	sw	zero,-24(s0)
+   100dc:	fec42783          	lw	a5,-20(s0)
+   100e0:	00279793          	slli	a5,a5,0x2
+   100e4:	fef42223          	sw	a5,-28(s0)
+   100e8:	fe842783          	lw	a5,-24(s0)
+   100ec:	00379793          	slli	a5,a5,0x3
+   100f0:	fef42023          	sw	a5,-32(s0)
+   100f4:	fe442783          	lw	a5,-28(s0)
+   100f8:	fe042703          	lw	a4,-32(s0)
+   100fc:	fdc42683          	lw	a3,-36(s0)
+   10100:	00df7f33          	and	t5,t5,a3
+   10104:	00ff6f33          	or	t5,t5,a5
+   10108:	00ef6f33          	or	t5,t5,a4
+   1010c:	f95ff06f          	j	100a0 <main+0x4c>
 ```
 
 
@@ -276,12 +273,12 @@ To verify the functionality of the Verilog code generated for the processor chip
 
 ### Case 1
 
-Here in this example, the inputs are control_switch = 1, Hall_sensor_value = 1. As the control switch is ON the system will start working now, as the hall sensor value is 1 , it means that the magnetic field is detected , hence the door is Closed. So the Buzzer and LED should be in OFF state. (Buzzer=0 , LED =0 ). The same is observed as a 2 bit output variable in the waveform.
+Here in this example, the inputs are control_switch = 1, Hall_sensor_value = 0. As the control switch is ON the system will start working now, as the hall sensor value is 0 ,since hall sensor value is a active low signal, it means that the magnetic field is detected , hence the door is Closed. So the Buzzer and LED should be in OFF state. (Buzzer=0 , LED =0 ). The same is observed as a 2 bit output variable in the waveform.
 
 ![Screenshot from 2023-10-28 11-13-38](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/d889dcae-f13e-4552-acef-3790636c0fae)
 
 ### Case 2
-Here in this example, the inputs are control_switch = 1, Hall_sensor_value = 0. As the control switch is ON the system will start working now, as the hall sensor value is 0 , it means that the magnetic field is not detected , hence the door is open. So the Buzzer and LED should be in ON state. (Buzzer=1 , LED =1 ). The same is observed as a 2 bit output variable in the waveform.
+Here in this example, the inputs are control_switch = 1, Hall_sensor_value = 1. As the control switch is ON the system will start working now, as the hall sensor value is 1 , it means that the magnetic field is not detected , hence the door is open. So the Buzzer and LED should be in ON state. (Buzzer=1 , LED =1 ). The same is observed as a 2 bit output variable in the waveform.
 
 
 
