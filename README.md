@@ -4,6 +4,8 @@
 
 A Hall sensor-based door alarm system is an electronic security device designed to monitor and detect the opening or closing of a door. It utilizes a Hall effect sensor, a specialized transducer that responds to changes in magnetic fields. In this context, the Hall sensor is strategically positioned in close proximity to a magnet that is affixed to either the door or the door frame. When the door is closed, the magnet aligns with the Hall sensor, creating a stable magnetic field. However, when the door is opened, the magnet moves away, causing a disruption in the magnetic field. This alteration triggers the Hall sensor to register a change in its output state. The system is programmed to recognize this transition and respond by activating an alarm, in the form of a buzzer alert. This setup serves as a simple yet effective means of enhancing security by providing an immediate alert in the event of unauthorized entry or tampering with the door. Hall-effect sensor gives output a low voltage when the magnet is near, and high voltage when the magnet is away.
 
+**Note**: Hall effect sensor produces active low output which means that if magnetic field is detected then output is 0 and when magnetic field is not detected the output is 1.
+
 ## Working of Hall sensor 
 
 A Hall sensor operates based on the Hall effect, where a voltage is generated across a conductor when subjected to a perpendicular magnetic field and an electric current. In a Hall sensor, a semiconductor chip responds to changes in a nearby magnetic field. When the magnetic field changes, it creates a voltage variation in the chip, which is then used to detect the presence, strength, and polarity of the magnetic field. This makes Hall sensors invaluable in various applications, from detecting door movement in security systems to precise control in motor applications.
@@ -82,7 +84,7 @@ int main() {
         */
 	 	
 	 	 
-         control = 0;
+         //control = 0;
         //printf("control value is updated as  %d\n",control);
          
       if (control) {   
@@ -107,10 +109,11 @@ int main() {
 
  */
               
-              hall_sensor =1;
+             // hall_sensor =0;
 	        if(hall_sensor){
            //printf("hall sensor is 1 therefore inside if loop\n");
-           //printf("Door Closed, Buzzer = OFF , led = OFF\n ");
+           //printf("Door Open!, Buzzer = ON, led =ON\n");
+           
 	
 	            buzzer = 1;
 	            led = 1;  	
@@ -118,7 +121,7 @@ int main() {
 	  
 	  else {
              //printf("hall sensor is 0 therefore else is executed\n");                          
-             //printf("Door Open!, Buzzer = ON, led =ON\n");
+             //printf("Door Closed, Buzzer = OFF , led = OFF\n ");
 
 	    buzzer =0;
 	    led=0;
