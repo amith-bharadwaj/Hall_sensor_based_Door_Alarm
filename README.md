@@ -275,7 +275,8 @@ To verify the functionality of the Verilog code generated for the processor chip
 
 Here in this example, the inputs are control_switch = 1, Hall_sensor_value = 0. As the control switch is ON the system will start working now, as the hall sensor value is 0 ,since hall sensor value is a active low signal, it means that the magnetic field is detected , hence the door is Closed. So the Buzzer and LED should be in OFF state. (Buzzer=0 , LED =0 ). The same is observed as a 2 bit output variable in the waveform.
 
-![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/75caf6f9-9070-4d0a-ba7e-283207b683c0)
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/8e7008c0-ec41-4aa5-855f-2331e0eca4e4)
+
 
 ### Case 2
 Here in this example, the inputs are control_switch = 1, Hall_sensor_value = 1. As the control switch is ON the system will start working now, as the hall sensor value is 1 , it means that the magnetic field is not detected , hence the door is open. So the Buzzer and LED should be in ON state. (Buzzer=1 , LED =1 ). The same is observed as a 2 bit output variable in the waveform.
@@ -285,7 +286,16 @@ Here in this example, the inputs are control_switch = 1, Hall_sensor_value = 1. 
 
 ### Case 3
 
+In this case, the inputs are control_switch = 0, Hall_sensor_value = 0. As the control switch is OFF , the system will not work, the hall sensor would not proceed to sense the magnetic field therefore output is 0. Buzzer and LED are OFF.
 
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/20ccecfe-36a8-4c8b-b714-42a0e5467f75)
+
+## Instruction Verification
+
+Here, Signal43, Signal45, and Signal58 serve as registers with specific functionalities.Signal43 contains the hardwired wire zero register, referred to as x0.Signal45 is designated as the register for the stack pointer, denoted as x2.Signal58 is associated with the a5 register.
+
+In the image below,the operation performed is the first instruction ''' addi sp,sp,-48 ```.
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/ff2b9cbd-f7d0-4a6c-bdf9-8eab289ef58e)
 
 
 ## References
