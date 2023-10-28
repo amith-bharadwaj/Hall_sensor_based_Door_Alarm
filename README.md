@@ -254,7 +254,8 @@ lw
 ### Case 1
 In this case,the control value is updated as 1, therefore it enters the if loop and checks for the sensor value. As the hall sensor is 1, the if loop is executed where it is notified that door is open so buzzer and led will be switched ON.
 
-![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/5bf553c3-5f58-47bf-a9c1-ee9081d3b5b7)
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/24dbfcab-e0a2-4e3d-a04d-c39bc44a4efd)
+
 
 ### Case 2
 
