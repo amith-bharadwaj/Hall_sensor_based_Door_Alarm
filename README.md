@@ -308,7 +308,7 @@ In the image below,the operation performed is the first instruction "addi sp,sp,
 
 ![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/21455fac-e431-4e22-a12c-0434328c99a4)
 
- In this instruction,00ef6f33  or t5,t5,a4 ,The a bitwise OR operation between the values in t5 and a4, and stores the result in t5.This is where the output is being dumped.
+ In this instruction,00ef6f33  or t5,t5,a4 ,The  bitwise OR operation between the values in t5 and a4, is performed and stores the result in t5.This is where the output is being dumped.
 
 ![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/7087b9de-1e60-4565-b333-6bf9d42e11f4)
 
