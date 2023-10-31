@@ -298,13 +298,20 @@ In this case, the inputs are control_switch = 0, Hall_sensor_value = 0. As the c
 
 Here, Signal43, Signal45, and Signal58 serve as registers with specific functionalities.Signal43 contains the hardwired wire zero register, referred to as x0.Signal45 is designated as the register for the stack pointer, denoted as x2.Signal58 is associated with the a5 register.
 
-In the image below,the operation performed is the first instruction "addi sp,sp,-48".
+In the image below,the operation performed is the first instruction "addi sp,sp,-48". 
 
 ![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/ff2b9cbd-f7d0-4a6c-bdf9-8eab289ef58e)
 
-In the image below we can see the instruction li a5,-13 being performed in the register file x58.The previous value is zero and the result obtained is -13 in hexadecimal.
+### Verification of input Instruction and output Instruction 
 
-![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/62eb122c-0a4f-499b-aca0-33c5f6597fee)
+ In this instruction,fec42783 lw a5,-20(s0), the value from memory at an offset of -20 bytes from the address in s0 is loaded into register a5. This is where the program is retrieving some data from memory, which is the input data.
+
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/21455fac-e431-4e22-a12c-0434328c99a4)
+
+ In this instruction,00ef6f33  or t5,t5,a4 ,The a bitwise OR operation between the values in t5 and a4, and stores the result in t5.This is where the output is being dumped.
+
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/7087b9de-1e60-4565-b333-6bf9d42e11f4)
+
 
 
 ## References
