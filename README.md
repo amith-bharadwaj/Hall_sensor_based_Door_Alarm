@@ -316,6 +316,8 @@ In the image below,the operation performed is the first instruction "addi sp,sp,
 
 Yosys is an open-source synthesis tool widely used in the field of digital design and electronic engineering. It plays a crucial role in the process of converting a high-level hardware description (usually written in a language like Verilog or VHDL) into a gate-level netlist, which can be further used for logic optimization and implementation on a target FPGA or ASIC platform. Yosys employs a series of algorithms and techniques, including technology mapping, optimization, and various heuristics, to efficiently translate and optimize the input design. It supports a range of synthesis targets, making it versatile and adaptable to different hardware platforms. Additionally, Yosys offers features for formal verification and other advanced analyses, making it a valuable tool for both initial synthesis and subsequent refinement of digital designs.
 
+
+
 ## Gate Level Simulation
 
 Gate-level simulation is a crucial step in the verification process of digital electronic designs. In gate-level simulation, the design is represented in terms of individual logic gates and their interconnections, rather than in a higher-level hardware description language (HDL) like Verilog or VHDL. This simulation approach provides a more detailed and accurate representation of how the actual hardware will behave. The simulator models the propagation delays of logic gates and simulates the switching behavior of signals. By applying test vectors to the inputs of the gates, designers can observe how the circuit responds, allowing them to detect and debug potential issues such as timing violations, race conditions, and logic errors. Gate-level simulation is particularly important for verifying the correctness and performance of a design before it is synthesized and implemented on hardware.
@@ -330,6 +332,19 @@ dfflibmap -liberty sky130_fd_sc_hd__tt_025C_1v80_256.lib
 abc -liberty sky130_fd_sc_hd__tt_025C_1v80_256.lib
 write_verilog synth_processor_test.v
 ```
+
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/364c6b37-dba6-4d91-8e00-3b594e093cae)
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/a3e2e339-2df9-4b91-b70e-480b14e3742c)
+
+
+In the image below, we can see the synthesized circuit for wrapper module in processor.
+```
+show wrapper
+```
+
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/37f7c3a9-be67-404d-958b-1abd98846db8)
+
+
 Follow the below command to run GLS simulation.
 
 ```
@@ -337,7 +352,13 @@ iverilog -o test synth_processor_test.v testbench.v sky130_sram_1kbyte_1rw1r_32x
 ```
 The output waveform generated is given below.
 
+**Case1:** In this case the inputs provided is ```11``` , the control switch is 1 and the hall sensor is 1 which means the magnetic field is not detected, therefore the buzzer and led should be ON.The same can be verified in the GLS Simulation waveform given below. It matches with the functional verification done in the previous steps.
+
 ![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/4f29ce0c-95d6-4f26-81b3-4543dc5d32f0)
+
+**Case2:** In this case the inputs provided is ```01``` , the control switch is 0 and the hall sensor is 1 which means the control switch is OFF, therefore the system does not function and outputs are 0.The same can be verified in the GLS Simulation waveform given below. It matches with the functional verification done in the previous steps.
+
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/948b39c4-b4c2-4322-9e09-6f3f284e7024)
 
 
 
