@@ -312,6 +312,33 @@ In the image below,the operation performed is the first instruction "addi sp,sp,
 
 ![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/7087b9de-1e60-4565-b333-6bf9d42e11f4)
 
+## Yosys Synthesis
+
+Yosys is an open-source synthesis tool widely used in the field of digital design and electronic engineering. It plays a crucial role in the process of converting a high-level hardware description (usually written in a language like Verilog or VHDL) into a gate-level netlist, which can be further used for logic optimization and implementation on a target FPGA or ASIC platform. Yosys employs a series of algorithms and techniques, including technology mapping, optimization, and various heuristics, to efficiently translate and optimize the input design. It supports a range of synthesis targets, making it versatile and adaptable to different hardware platforms. Additionally, Yosys offers features for formal verification and other advanced analyses, making it a valuable tool for both initial synthesis and subsequent refinement of digital designs.
+
+## Gate Level Simulation
+
+Gate-level simulation is a crucial step in the verification process of digital electronic designs. In gate-level simulation, the design is represented in terms of individual logic gates and their interconnections, rather than in a higher-level hardware description language (HDL) like Verilog or VHDL. This simulation approach provides a more detailed and accurate representation of how the actual hardware will behave. The simulator models the propagation delays of logic gates and simulates the switching behavior of signals. By applying test vectors to the inputs of the gates, designers can observe how the circuit responds, allowing them to detect and debug potential issues such as timing violations, race conditions, and logic errors. Gate-level simulation is particularly important for verifying the correctness and performance of a design before it is synthesized and implemented on hardware.
+Follow these below commands to convert RTL code into netlist by yosys.
+
+```
+yosys
+read_liberty -lib sky130_fd_sc_hd__tt_025C_1v80_256.lib 
+read_verilog processor.v 
+synth -top wrapper
+dfflibmap -liberty sky130_fd_sc_hd__tt_025C_1v80_256.lib 
+abc -liberty sky130_fd_sc_hd__tt_025C_1v80_256.lib
+write_verilog synth_processor_test.v
+```
+Follow the below command to run GLS simulation.
+
+```
+iverilog -o test synth_processor_test.v testbench.v sky130_sram_1kbyte_1rw1r_32x256_8.v sky130_fd_sc_hd.v primitives.v
+```
+The output waveform generated is given below.
+
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/4f29ce0c-95d6-4f26-81b3-4543dc5d32f0)
+
 
 
 ## References
