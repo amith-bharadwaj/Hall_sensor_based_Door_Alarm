@@ -361,8 +361,10 @@ The output waveform generated is given below.
 ![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/948b39c4-b4c2-4322-9e09-6f3f284e7024)
 
 ## Acknowledgement
-
-Thankful to Mr Kunal Ghosh, Co-Founder, VLSI SYSTEM DESIGN for providing an excellent learning opportunity and platform to expand our skills on a custom RISCV architecture design.
+1. Mr Kunal Ghosh, Co-Founder VLSI SYSTEM DESIGN 
+2. Mayank Kabra,Founder,Chipcron Pvt.Ltd.
+3. Alwin Shaju IIITB
+4. Bhargav DV IIITB
 
 ## References
 
