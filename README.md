@@ -471,6 +471,25 @@ magic -T /home/amith/.volare/volare/sky130/versions/1341f54f5ce0c4955326297f235e
 ```
 ![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/bc42e177-a828-4878-b553-3d9c149ac381)
 
+## CTS
+
+The goal is to ensure uniform and low-skew distribution of clock signals to all components, facilitating synchronous and reliable operation of the entire integrated circuit. Clock tree analysis involves designing a hierarchical tree-like structure of clock distribution lines, buffers, and clock gating cells. This process aims to minimize clock skew, reduce power consumption, and meet stringent timing requirements. By carefully managing clock signals, designers can enhance the overall performance and reliability of the chip. The clock tree analysis phase is essential for achieving timing closure and ensuring that all sequential elements in the design are synchronized.
+
+command to run cts:
+```
+%run_cts
+```
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/bee3bdf5-7b59-4c3d-a1f0-42de42d7a784)
+
+## Routing
+
+Routing is a crucial phase in VLSI physical design that involves the detailed planning and implementation of interconnections between different components on a semiconductor chip. After placement, where the positions of individual elements are determined, the routing process establishes the paths for wires or metal tracks to connect these elements. Global routing defines the high-level connections, while detailed routing specifies the exact paths, adhering to design rules and constraints. Efficient routing aims to minimize signal delays, optimize for performance and area, and meet specified design objectives. Advanced algorithms and optimization techniques are employed to navigate the complex task of interconnecting thousands or millions of components while considering factors like congestion, wirelength, and signal integrity. Successful routing is crucial for achieving the desired functionality, performance, and manufacturability of the integrated circuit.
+
+command to run routing is:
+```
+%run_routing
+```
+![Screenshot from 2023-11-14 12-25-32](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/a4a186cd-0816-429c-a6d5-d2b8b6a6db3e)
 
 
 ## Acknowledgement
