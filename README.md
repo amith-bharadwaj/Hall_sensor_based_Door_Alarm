@@ -360,6 +360,52 @@ The output waveform generated is given below.
 
 ![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/948b39c4-b4c2-4322-9e09-6f3f284e7024)
 
+## Physical Design
+
+Physical design in VLSI (Very Large Scale Integration) refers to the process of transforming a logical circuit representation of an integrated circuit (IC) into a physical layout that can be manufactured. This process involves translating the logical design into a geometric representation that can be fabricated on a semiconductor substrate. The physical design process is critical for achieving the desired performance, power efficiency, and manufacturability of the integrated circuit.
+
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/6245bcca-69d0-4228-9ada-1993239a0480)
+
+Here is a brief overview of the key steps in the physical design:
+
+**Floorplanning:** Involves allocating space for various functional blocks of the design on the chip.Determines the overall chip size, the placement of major components, and the interconnections between them.
+
+**Placement:**
+        Decides the exact locations of individual standard cells or other functional elements on the chip.
+        Aims to minimize the total wire length and optimize for performance and area.
+
+**Global Routing:**
+Establishes the high-level connections between different blocks on the chip.
+        Defines the general paths that the interconnecting wires will follow.
+
+**Detailed Routing:**
+        Focuses on the detailed paths of interconnections between individual transistors and gates.
+        Involves metal layer routing to connect various components while adhering to design rules and constraints.
+
+**Clock Tree Synthesis:**
+        Designs a network of clock distribution lines to ensure synchronized operation of all components.
+        Aims to minimize clock skew and maintain signal integrity.
+
+**Power Planning:**
+        Manages the distribution of power throughout the chip to ensure that each component receives the necessary power supply.
+        Addresses issues related to power consumption and dissipation.
+
+**Physical Verification:**
+        Involves checking the layout against design rules and constraints to ensure manufacturability.
+        Includes tasks such as design rule checking (DRC) and layout versus schematic (LVS) verification.
+
+**Extraction:**
+        Extracts parasitic information from the layout, such as resistance and capacitance, for use in subsequent simulations.
+
+**Timing Closure:**
+        Focuses on meeting the specified timing requirements by adjusting the placement and sizing of components.
+        Involves multiple iterations to achieve optimal performance.
+
+**Signoff:**
+        The final step involves obtaining approval from various design tools and signoff criteria.
+        Once signoff is achieved, the design is considered ready for fabrication.
+
+ 
 ## Acknowledgement
 1. Mr Kunal Ghosh, Co-Founder VLSI SYSTEM DESIGN 
 2. Mayank Kabra,Founder,Chipcron Pvt.Ltd.
