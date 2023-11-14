@@ -521,6 +521,35 @@ command to run routing is:
 ### DRC check
 ![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/bb097228-a3d7-489b-a3a5-b8c2c0c31eff)
 
+## Calculation
+
+The clock period in Json file is 55ns, the setup slack obtained is Given a Clock period of 50ns in Json file , setup slack we got after routing is 14.66ns.
+Maximum performance is  1/(clock period - slack)
+Maximum performance is **24.78929** **MHz** = **0.02479** **GHz**
+**
+## Flow of Open Lane
+```
+cd OpenLane
+make mount
+./flow.tcl -interactive
+package require openlane 0.9
+prep -design project_riscv
+run_synthesis
+run_floorplan
+run_placement
+run_cts
+gen_pdn
+run_routing
+run_magic
+run_magic_spice_export
+run_magic_drc
+run_antenna_check
+```
+The screenshot of operations after routing is seen below.
+
+![Screenshot from 2023-11-14 12-55-26](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/4635bfb7-b71b-4a6b-b232-c75fe46ed537)
+
+
 ## Acknowledgement
 1. Mr Kunal Ghosh, Co-Founder VLSI SYSTEM DESIGN 
 2. Mayank Kabra,Founder,Chipcron Pvt.Ltd.
