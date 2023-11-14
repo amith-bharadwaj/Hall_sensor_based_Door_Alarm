@@ -1,4 +1,4 @@
-![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/f3129563-6793-4dc8-ae4a-ccc3fefcca72)![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/80b59b4e-d915-4e67-b0e1-419833438ed4)![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/c51bbf0f-06e9-48ee-9963-20a74da2cb00)![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/08f2a1d4-66c1-46b8-97f6-e5fb19b1f163)# Hall sensor based Door Alarm
+# Hall sensor based Door Alarm
 
 ## Functionality of the system
 
