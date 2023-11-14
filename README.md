@@ -547,7 +547,7 @@ run_antenna_check
 ```
 The screenshot of operations after routing is seen below.
 
-![Screenshot from 2023-11-14 12-55-26](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/4635bfb7-b71b-4a6b-b232-c75fe46ed537)
+![Screenshot from 2023-11-14 12-55-50](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/35307706-d3a8-4eeb-96b1-270404a36c8e)
 
 
 ## Acknowledgement
