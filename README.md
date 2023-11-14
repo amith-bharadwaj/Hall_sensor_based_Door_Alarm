@@ -526,7 +526,7 @@ command to run routing is:
 The clock period in Json file is 55ns, the setup slack obtained is Given a Clock period of 50ns in Json file , setup slack we got after routing is 14.66ns.
 Maximum performance is  1/(clock period - slack)
 Maximum performance is **24.78929** **MHz** = **0.02479** **GHz**
-**
+
 ## Flow of Open Lane
 ```
 cd OpenLane
