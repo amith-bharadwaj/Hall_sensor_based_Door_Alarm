@@ -1,4 +1,4 @@
-# Hall sensor based Door Alarm
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/f3129563-6793-4dc8-ae4a-ccc3fefcca72)![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/80b59b4e-d915-4e67-b0e1-419833438ed4)![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/c51bbf0f-06e9-48ee-9963-20a74da2cb00)![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/08f2a1d4-66c1-46b8-97f6-e5fb19b1f163)# Hall sensor based Door Alarm
 
 ## Functionality of the system
 
@@ -405,7 +405,55 @@ Establishes the high-level connections between different blocks on the chip.
         The final step involves obtaining approval from various design tools and signoff criteria.
         Once signoff is achieved, the design is considered ready for fabrication.
 
- 
+##  Preparing the Design
+
+Include the files in the working directory, and perform the following commands.
+```
+make mount
+%./flow.tcl -interactive
+% package require openlane 0.9
+% prep -design project_riscv
+```
+![Screenshot from 2023-11-14 11-38-34](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/7a9fde6b-4e8f-41f0-b87e-610e17023110)
+
+## Synthesis
+
+Synthesis is the process of converting a high-level hardware description, typically in a hardware description language (HDL) like Verilog or VHDL, into a netlist of logical gates and flip-flops. This netlist represents the functionality of the circuit without specifying the physical layout. Synthesis tools optimize the design for area, power, and timing, generating a register transfer level (RTL) description that serves as the input for subsequent stages of the VLSI Physical design flow.
+
+Follow the below command to run synthesis.
+```
+%run_synthesis
+```
+![Screenshot from 2023-11-14 11-40-38](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/616fcb75-3d9d-4681-8e92-bca06cb20059)
+
+The statistics after synthesis can be seen below:
+
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/e47dd13a-94e4-4a05-b54a-3911709acfab)
+
+## FloorPlanning
+
+Floor planning involves the strategic allocation of space on a semiconductor chip for different functional blocks. This process determines the overall chip size, the placement of major components, and the interconnections between them. Efficient floor planning is crucial for optimizing chip performance, minimizing signal delays, and managing power distribution. It considers factors such as the physical proximity of critical components, interconnect lengths, and the overall layout's impact on manufacturability. 
+
+Follow the below command to run Floorplan.
+
+```
+%run_floorplan
+```
+![Screenshot from 2023-11-14 11-41-10](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/938649a3-e553-4ffa-aa5e-803f269eabe3)
+
+
+To view the floorplan on Magic, follow the below command in floorplan directory.
+
+```
+magic -T /home/amith/.volare/volare/sky130/versions/1341f54f5ce0c4955326297f235e4ace1eb6d419/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.nom.lef def read wrapper.def &
+```
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/355057ab-1438-4bd1-82dc-c710135d6f78)
+### Die Area
+
+
+### Core Area
+
+
 ## Acknowledgement
 1. Mr Kunal Ghosh, Co-Founder VLSI SYSTEM DESIGN 
 2. Mayank Kabra,Founder,Chipcron Pvt.Ltd.
