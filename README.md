@@ -448,10 +448,29 @@ To view the floorplan on Magic, follow the below command in floorplan directory.
 magic -T /home/amith/.volare/volare/sky130/versions/1341f54f5ce0c4955326297f235e4ace1eb6d419/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.nom.lef def read wrapper.def &
 ```
 ![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/355057ab-1438-4bd1-82dc-c710135d6f78)
-### Die Area
 
+### Die Area And Core Area after floorplan
 
-### Core Area
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/73c97294-b646-42f0-930b-658656a1f73e)
+
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/50ac5be5-8f98-4c3e-8550-391ae9348f66)
+
+## Placement
+
+In Placement, the individual functional elements, such as standard cells or IP blocks, are strategically positioned on the semiconductor chip. The goal is to optimize the arrangement to minimize the overall interconnect wirelength, which directly impacts performance and power consumption. The placement process involves algorithms that consider factors like signal delays, congestion, and the physical proximity of components to enhance the chip's overall efficiency. Effective placement sets the foundation for subsequent steps in the design flow, influencing the circuit's area utilization, timing closure, and manufacturability.
+
+command to run placement is given below.
+```
+%run_placement
+```
+![Screenshot from 2023-11-14 11-51-34](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/77508fbd-47ec-4afc-90c9-e27e0b9d78af)
+
+Follow the below command to view the layout after placement in magic software in the placement directory.
+```
+magic -T /home/amith/.volare/volare/sky130/versions/1341f54f5ce0c4955326297f235e4ace1eb6d419/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.nom.lef def read wrapper.def &
+```
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/bc42e177-a828-4878-b553-3d9c149ac381)
+
 
 
 ## Acknowledgement
