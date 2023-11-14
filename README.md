@@ -481,6 +481,16 @@ command to run cts:
 ```
 ![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/bee3bdf5-7b59-4c3d-a1f0-42de42d7a784)
 
+## Reports
+### Timing and area report
+
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/46c5fbf4-4b14-43bc-983c-c3148bfc94b1)
+
+### Power report and skew report
+
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/f23b049a-e726-488b-95ca-1d6d1c6e9211)
+
+
 ## Routing
 
 Routing is a crucial phase in VLSI physical design that involves the detailed planning and implementation of interconnections between different components on a semiconductor chip. After placement, where the positions of individual elements are determined, the routing process establishes the paths for wires or metal tracks to connect these elements. Global routing defines the high-level connections, while detailed routing specifies the exact paths, adhering to design rules and constraints. Efficient routing aims to minimize signal delays, optimize for performance and area, and meet specified design objectives. Advanced algorithms and optimization techniques are employed to navigate the complex task of interconnecting thousands or millions of components while considering factors like congestion, wirelength, and signal integrity. Successful routing is crucial for achieving the desired functionality, performance, and manufacturability of the integrated circuit.
@@ -491,6 +501,25 @@ command to run routing is:
 ```
 ![Screenshot from 2023-11-14 12-25-32](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/a4a186cd-0816-429c-a6d5-d2b8b6a6db3e)
 
+### Magic Layout
+
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/4a678a4d-5e8c-4334-9963-2b671f7bb064)
+
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/b5306c9d-f122-42dc-b454-23b8746a49f0)
+
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/349899e2-49fe-4416-981c-53619a4609ec)
+
+## Routing reports
+
+### Timing and area report
+
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/2df05082-37e9-4f39-8921-b487bca794ee)
+
+### Power Report
+
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/05561e47-e43a-4d37-be97-5302ee173a3d)
+### DRC check
+![image](https://github.com/amith-bharadwaj/Hall_sensor_based_Door_Alarm/assets/84613258/bb097228-a3d7-489b-a3a5-b8c2c0c31eff)
 
 ## Acknowledgement
 1. Mr Kunal Ghosh, Co-Founder VLSI SYSTEM DESIGN 
